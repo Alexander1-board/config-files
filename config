@@ -51,8 +51,12 @@
         bindsym $mod+Shift+c reload
         bindsym $mod+Shift+r restart
 
+    #MENUS
+       bindsym $mod+z exec --no-startup-id morc_menu
+       bindsym $mod+a exec --no-startup-id rofi
+
+
     #LAUNCH APPS
-        bindsym $mod+a exec --no-startup-id rofi
         bindsym $mod+Return exec i3-sensible-terminal
         bindsym $mod+z exec zoom
         bindsym $mod+f exec files
