@@ -1,90 +1,20 @@
-  #UNDER THE HOOD
+ #I3 config#
+
+ #VARIABLES
       set $mod Mod4
+
+#STARTUP
+      exec --no-startup-id dex --autostart --environment i3
       exec --no-startup-id nm-applet
-
-#OVERALL
-      bindsym $mod+Shift+c reload
-      bindsym $mod+Shift+r restart
-      bindsym $mod+a exec --no-startup-id albert
-
-#WINDOW NAV
-      bindsym shift+f fullscreen
-      bindsym Ctrl+q kill
-
-      # split
-      bindsym $mod+h split h
-      bindsym $mod+v split v
-
-      # focus
-      bindsym $mod+Left focus left
-      bindsym $mod+Down focus down
-      bindsym $mod+Up focus up
-      bindsym $mod+Right focus right
-
-      # move
-      bindsym $mod+Shift+Left move left
-      bindsym $mod+Shift+Down move down
-      bindsym $mod+Shift+Up move up
-      bindsym $mod+Shift+Right move right
-
-      # resize
-      mode "resize" {
-              bindsym Left resize shrink width 2 px or 2 ppt
-              bindsym Down resize grow height 2 px or 2 ppt
-              bindsym Up resize shrink height 2 px or 2 ppt
-              bindsym Right resize grow width 2 px or 2 ppt
-
-              bindsym Escape mode "default"
-              bindsym $mod+r mode "default"
-      }
-      bindsym $mod+r mode "resize"
-
-#WORKPLACE NAV
-
-      # define
-      set $ws1 "1 hub"
-      set $ws2 "2 files"
-      set $ws3 "3 work"
-      set $ws4 "4 video"
-      set $ws5 "5 music"
-      set $ws6 "6 coding"
-      set $ws7 "7"
-      set $ws8 "8"
-      set $ws9 "9"
-      set $ws10 "10"
-
-      # switch
-      bindsym $mod+1 workspace number $ws1
-      bindsym $mod+2 workspace number $ws2
-      bindsym $mod+3 workspace number $ws3
-      bindsym $mod+4 workspace number $ws4
-      bindsym $mod+5 workspace number $ws5
-      bindsym $mod+6 workspace number $ws6
-      bindsym $mod+7 workspace number $ws7
-      bindsym $mod+8 workspace number $ws8
-      bindsym $mod+9 workspace number $ws9
-      bindsym $mod+0 workspace number $ws10
-
-      # move
-      bindsym $mod+Shift+1 move container to workspace number $ws1
-      bindsym $mod+Shift+2 move container to workspace number $ws2
-      bindsym $mod+Shift+3 move container to workspace number $ws3
-      bindsym $mod+Shift+4 move container to workspace number $ws4
-      bindsym $mod+Shift+5 move container to workspace number $ws5
-      bindsym $mod+Shift+6 move container to workspace number $ws6
-      bindsym $mod+Shift+7 move container to workspace number $ws7
-      bindsym $mod+Shift+8 move container to workspace number $ws8
-      bindsym $mod+Shift+9 move container to workspace number $ws9
-      bindsym $mod+Shift+0 move container to workspace number $ws10
 
 #APPEARANCE
       font pango:calibri Sans Serif 10
       hide_edge_borders both
       binding_mode_indicator yes
       default_border pixel 0
+      exec_always compton -f -I=0.5
 
-
-      # define colors
+       # colors
       set $bar-color 	        #2B170880
       set $bg-color            #000000
       set $inactive-bg-color   #2C2C2C
@@ -92,46 +22,117 @@
       set $inactive-text-color #A6A6A6
       set $urgent-bg-color     #8B0000
 
-      # window colors
       #                       border              background         text                 indicator
       client.focused          $bg-color           $bg-color          $text-color          #ffffff
       client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color  #ffffff
       client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color  #ffffff
       client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #ffffff
 
-      # bar
-      bar {
-            status_command i3blocks
+    # bar
+        bar {
+                status_command i3blocks
 
-            i3bar_command i3bar --transparency
-            position top
+                i3bar_command i3bar --transparency
+                position top
 
-      	    colors {
-                  		background $bar-color
-                  	    	separator #757575
-                  		#                  border             background         text
-                  		focused_workspace  $bg-color          $bg-color          $text-color
-                  		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-                  		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-                  	}
-            }
+                colors {
+                            background $bar-color
+                                separator #757575
+                                #                  border             background         text
+                                focused_workspace  $bg-color          $bg-color          $text-color
+                                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+                                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+                            }
+                    }
 
-#SHORTCUTS
-      bindsym Ctrl+space exec xsel | festival --tts
-      focus_follows_mouse yes
-      bindsym $mod+t exec i3-sensible-terminal
-      bindsym $mod+z exec zoom
-      bindsym $mod+f exec files
-      bindsym $mod+i exec firefox
-      bindsym $mod+d exec discord
-      bindsym $mod+m exec mailspring
- #     bindsym $mod+t exec
-  #    bindsym $mod+t exec
+#KEY BINDINGS
 
-#MOUSE
+    #i3
+        bindsym $mod+Shift+c reload
+        bindsym $mod+Shift+r restart
+
+    #LAUNCH APPS
+        bindsym $mod+a exec --no-startup-id rofi
+        bindsym $mod+Return exec i3-sensible-terminal
+        bindsym $mod+z exec zoom
+        bindsym $mod+f exec files
+        bindsym $mod+i exec firefox
+        bindsym $mod+d exec discord
+        bindsym $mod+m exec mailspring
+
+    #WINDOW NAVIGATION
+        bindsym $mod+f fullscreen
+        bindsym $mod+q kill
+        bindsym Ctrl+space exec xsel | festival --tts
+
+        # split
+        bindsym $mod+h split h
+        bindsym $mod+v split v
+
+        # focus
+        bindsym $mod+Left focus left
+        bindsym $mod+Down focus down
+        bindsym $mod+Up focus up
+        bindsym $mod+Right focus right
+
+        # move
+        bindsym $mod+Shift+Left move left
+        bindsym $mod+Shift+Down move down
+        bindsym $mod+Shift+Up move up
+        bindsym $mod+Shift+Right move right
+
+        # resize
+        mode "resize" {
+                bindsym Left resize shrink width 2 px or 2 ppt
+                bindsym Down resize grow height 2 px or 2 ppt
+                bindsym Up resize shrink height 2 px or 2 ppt
+                bindsym Right resize grow width 2 px or 2 ppt
+
+                bindsym Escape mode "default"
+                bindsym $mod+r mode "default"
+        }
+        bindsym $mod+r mode "resize"
+
+    #WORKSPACE
+
+        # define
+        set $ws1 "1 hub"
+        set $ws2 "2 files"
+        set $ws3 "3 work"
+        set $ws4 "4 video"
+        set $ws5 "5 music"
+        set $ws6 "6 coding"
+        set $ws7 "7"
+        set $ws8 "8"
+        set $ws9 "9"
+        set $ws10 "10"
+
+        # switch
+        bindsym $mod+1 workspace number $ws1
+        bindsym $mod+2 workspace number $ws2
+        bindsym $mod+3 workspace number $ws3
+        bindsym $mod+4 workspace number $ws4
+        bindsym $mod+5 workspace number $ws5
+        bindsym $mod+6 workspace number $ws6
+        bindsym $mod+7 workspace number $ws7
+        bindsym $mod+8 workspace number $ws8
+        bindsym $mod+9 workspace number $ws9
+        bindsym $mod+0 workspace number $ws10
+
+        # move
+        bindsym $mod+Shift+1 move container to workspace number $ws1
+        bindsym $mod+Shift+2 move container to workspace number $ws2
+        bindsym $mod+Shift+3 move container to workspace number $ws3
+        bindsym $mod+Shift+4 move container to workspace number $ws4
+        bindsym $mod+Shift+5 move container to workspace number $ws5
+        bindsym $mod+Shift+6 move container to workspace number $ws6
+        bindsym $mod+Shift+7 move container to workspace number $ws7
+        bindsym $mod+Shift+8 move container to workspace number $ws8
+        bindsym $mod+Shift+9 move container to workspace number $ws9
+        bindsym $mod+Shift+0 move container to workspace number $ws10
+
+#MOUSE BINDINGS
 #     bindsym --release button2
 
-#STARTUP
-
-      exec_always --no-startup-id feh --bg-scale /home/alexander/Downloads/wallpaper2.jpg
-      exec_always compton -f -I=0.5
+#MISC SETTINGS
+    focus_follows_mouse yes
